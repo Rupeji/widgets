@@ -1,1 +1,1 @@
-sudo bootc usr-overlay; and printf '[Desktop Entry]\nName=KineticWE\nComment=KineticWE Compositor with Noctalia Shell\nExec=/usr/bin/start-kineticwe\nType=Application\nDesktopNames=KineticWE\n' | sudo tee /usr/share/wayland-sessions/kineticwe.desktop >/dev/null
+printf '[terminal]\nvt = 1\n\n[default_session]\ncommand = "noctalia-greeter-session"\nuser = "greeter"\n\n[initial_session]\ncommand = "/usr/bin/start-kineticwe"\nuser = "inhumano"\n' | sudo tee /etc/greetd/config.toml >/dev/null
