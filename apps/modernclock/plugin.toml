@@ -1,0 +1,11 @@
+[plugin]
+id = "com.rupeji.modernclock"
+name = "Modern Clock (Mond)"
+version = "1.0.0"
+author = "Rupeji & Inhumano"
+api_version = 22
+
+[desktop_widget]
+entry = "init.luau"
+default_width = 450
+default_height = 180
