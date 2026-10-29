@@ -4,12 +4,12 @@ local timer = require("noctalia.timer")
 
 local plugin = {}
 
--- Función para obtener el tiempo respetando la localización nativa del sistema
+-- Función para obtener el tiempo respetando la localización nativa del sistema operativo
 local function get_localized_time()
-    -- %A = Nombre completo del día de la semana según el idioma del sistema
-    -- %B = Nombre completo del mes según el idioma del sistema
-    -- %d = Día del mes con dos dígitos
-    -- %Y = Año con cuatro dígitos
+    -- %A = Nombre completo del día de la semana (se adapta solo al idioma del sistema)
+    -- %B = Nombre completo del mes (se adapta solo al idioma del sistema)
+    -- %d = Número del día del mes
+    -- %Y = Año completo
     local text_day   = os.date("%A")
     local text_time  = os.date("%H:%M")
     local text_date  = os.date("%B %d, %Y")
@@ -20,26 +20,26 @@ end
 function plugin.init()
     local day, hora, fecha = get_localized_time()
 
-    -- 1. El marco contenedor (Totalmente transparente para flotar sobre cualquier wallpaper)
+    -- 1. El marco contenedor (Totalmente transparente para flotar sobre el fondo de pantalla)
     local container = ui.create("Frame", {
         Size = ui.size(450, 180),
-        BackgroundColor = ui.color(0, 0, 0, 0),
+        BackgroundColor = ui.color(0, 0, 0, 0), -- Transparencia total
         Padding = 10
     })
 
-    -- 2. El Día de la Semana (Usa la fuente oficial Anurati y el color acento aciano/malva)
+    -- 2. El Día de la Semana (Usa la fuente Anurati oficial en el color acento Catppuccin)
     local day_label = ui.create("TextLabel", {
         Parent = container,
         Size = ui.size(430, 60),
         Position = ui.point(0, 0),
         Text = day,
-        TextColor = palette.get("mauve"), -- Tono pastel dinámico de Catppuccin
+        TextColor = palette.get("mauve"), -- Color pastel dinámico
         TextSize = 46,
-        Font = "Anurati, Sans", -- Tipografía oficial del widget original de Prayag2
+        Font = "Anurati, Sans", -- Llama a tu fuente Anurati geométrica
         Alignment = "Left"
     })
 
-    -- 3. La Hora y Minutos (Línea minimalista y fina usando la tipografía Poppins)
+    -- 3. La Hora y Minutos (Línea minimalista usando la tipografía Poppins)
     local time_label = ui.create("TextLabel", {
         Parent = container,
         Size = ui.size(430, 50),
@@ -47,12 +47,12 @@ function plugin.init()
         Text = hora,
         TextColor = palette.get("text"),
         TextSize = 38,
-        Font = "Poppins, Sans", -- Tipografía oficial para el reloj minimalista
+        Font = "Poppins, Sans", -- Llama a tu fuente Poppins limpia
         Bold = false,
         Alignment = "Left"
     })
 
-    -- 4. La Fecha Completa (Pequeña, estilizada y adaptada al idioma local)
+    -- 4. La Fecha Completa (Pequeña, elegante y formateada según el idioma local)
     local date_label = ui.create("TextLabel", {
         Parent = container,
         Size = ui.size(430, 30),
@@ -64,7 +64,7 @@ function plugin.init()
         Alignment = "Left"
     })
 
-    -- 5. EL TEMPORIZADOR DE TIEMPO REAL: Se refresca cada segundo con gasto 0 de CPU
+    -- 5. EL REFRESH EN TIEMPO REAL: Se despierta cada segundo gastando 0% de CPU
     timer.create(1.0, function()
         local current_day, current_hora, current_fecha = get_localized_time()
         day_label.Text = current_day
