@@ -1,8 +1,1 @@
-sudo bootc usr-overlay
-Usa el código con precaución.
-
-printf '[Desktop Entry]\nName=KineticWE\nComment=KineticWE Compositor with Noctalia Shell\nExec=/usr/bin/start-kineticwe\nType=Application\nDesktopNames=KineticWE\n' | sudo tee /usr/share/wayland-sessions/kineticwe.desktop >/dev/null
-
-Una vez ejecutadas esas dos líneas, dale el empujón final al gestor de inicio para comprobar que el bucle de login ha pasado a la historia:
-bash
-sudo systemctl restart greetd
+sudo bootc usr-overlay; and printf '[Desktop Entry]\nName=KineticWE\nComment=KineticWE Compositor with Noctalia Shell\nExec=/usr/bin/start-kineticwe\nType=Application\nDesktopNames=KineticWE\n' | sudo tee /usr/share/wayland-sessions/kineticwe.desktop >/dev/null
