@@ -1,12 +1,13 @@
 #!/usr/bin/bash
 set -euo pipefail
 
-# Determinar las rutas respetando los estándares XDG
+# Determinar las rutas respetando los estándares XDG y KineticWE
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-PLUGIN_DIR="$DATA_HOME/noctalia/plugins/com.rupeji.modernclock"
+PLUGIN_DIR="$DATA_HOME/noctalia-kwe/plugins/modernclock"
 FONT_DIR="$HOME/.local/share/fonts/rupeji-widgets"
 
 echo "=== INSTALADOR AUTOMÁTICO: Modern Clock (Mond) ==="
+echo "Destino: $PLUGIN_DIR"
 
 # 1. Instalar las fuentes originales en el sistema de usuario
 echo "[+] Copiando tipografías premium (Anurati y Poppins)..."
@@ -20,10 +21,14 @@ if [ -d "$REPO_ROOT/assets" ]; then
   fc-cache -f "$FONT_DIR" >/dev/null 2>&1 || true
 fi
 
-# 2. Enlazar el Widget en Noctalia
-echo "[+] Creando enlace simbólico del widget en Noctalia..."
+# 2. Enlazar el Widget en Noctalia KWE
+echo "[+] Creando enlace simbólico del widget..."
 rm -rf "$PLUGIN_DIR"
 mkdir -p "$(dirname "$PLUGIN_DIR")"
 ln -sf "$SCRIPT_DIR" "$PLUGIN_DIR"
 
-echo "[✓] ¡Instalación completada! Reinicia tu entorno gráfico para activar las fuentes y el reloj."
+# 3. Forzar el refresco del greeter gráfico para despertar el plugin
+echo "[+] Forzando reinicio del entorno gráfico..."
+sudo systemctl restart greetd || true
+
+echo "[✓] ¡Instalación completada! Abre el menú de configuración de KineticWE para añadir tu widget."
