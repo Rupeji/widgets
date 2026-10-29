@@ -1,9 +1,9 @@
 [plugin]
-id = "com.rupeji.modernclock"
+id = "rupeji/modernclock"
 name = "Modern Clock (Mond)"
 version = "1.0.0"
 author = "Rupeji & Inhumano"
-api_version = 22
+plugin_api = 22
 
 [desktop_widget]
 entry = "init.luau"
