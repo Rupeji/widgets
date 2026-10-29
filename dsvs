@@ -1,21 +1,7 @@
 sudo bootc usr-overlay
 Usa el código con precaución.
 
-2️⃣ Sobrescribir el lanzador con la ruta absoluta usando tee
-
-En lugar de pelearnos con los archivos temporales de sed, vamos a machacar el archivo inyectando el bloque de configuración limpio de forma directa:
-bash
-cat << 'EOF' | sudo tee /usr/share/wayland-sessions/kineticwe.desktop >/dev/null
-[Desktop Entry]
-Name=KineticWE
-Comment=KineticWE Compositor with Noctalia Shell
-Exec=/usr/bin/start-kineticwe
-Type=Application
-DesktopNames=KineticWE
-EOF
-Usa el código con precaución.
-
-🎥 ¡La prueba de fuego definitiva!
+printf '[Desktop Entry]\nName=KineticWE\nComment=KineticWE Compositor with Noctalia Shell\nExec=/usr/bin/start-kineticwe\nType=Application\nDesktopNames=KineticWE\n' | sudo tee /usr/share/wayland-sessions/kineticwe.desktop >/dev/null
 
 Una vez ejecutadas esas dos líneas, dale el empujón final al gestor de inicio para comprobar que el bucle de login ha pasado a la historia:
 bash
