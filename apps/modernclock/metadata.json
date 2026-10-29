@@ -1,0 +1,9 @@
+{
+  "id": "com.rupeji.modernclock",
+  "name": "Modern Clock (Mond)",
+  "version": "1.0.0",
+  "author": "Rupeji & Inhumano (Original: Prayag2)",
+  "description": "Port estético de la skin Mond de Rainmeter para KineticWE",
+  "type": "desktop-widget",
+  "api_version": 22
+}
